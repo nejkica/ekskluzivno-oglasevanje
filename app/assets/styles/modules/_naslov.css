@@ -1,0 +1,14 @@
+.naslov {
+	font-size: 2.1rem;
+	width: 100vw;
+	font-weight: 300;
+	color: $mainBlue;
+	
+
+	@mixin atMedium {
+		font-size: 3.5rem;
+		width: 500px;
+		
+	}
+	/*padding-left: 20px;*/
+}

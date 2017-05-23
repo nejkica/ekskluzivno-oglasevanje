@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 import $ from 'jquery';
 
 class MobileMenu {
@@ -5,11 +6,13 @@ class MobileMenu {
     this.siteHeader = $(".site-header");
     this.menuIcon = $(".site-header__menu-icon");
     this.menuContent = $(".site-header__menu-content");
+    this.menuLI = $(".primary-nav__link");
     this.events();
   }
 
   events() {
     this.menuIcon.click(this.toggleTheMenu.bind(this));
+    this.menuLI.click(this.toggleTheMenu.bind(this))
   }
 
   toggleTheMenu() {

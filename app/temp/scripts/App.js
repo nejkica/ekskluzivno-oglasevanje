@@ -50,29 +50,35 @@
 
 	var _MobileMenu2 = _interopRequireDefault(_MobileMenu);
 
-	var _RevealOnScroll = __webpack_require__(3);
-
-	var _RevealOnScroll2 = _interopRequireDefault(_RevealOnScroll);
-
 	var _jquery = __webpack_require__(2);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	var _StickyHeader = __webpack_require__(5);
+	var _StickyHeader = __webpack_require__(3);
 
 	var _StickyHeader2 = _interopRequireDefault(_StickyHeader);
 
-	var _Modal = __webpack_require__(7);
+	var _Modal = __webpack_require__(6);
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
+	var _PozdravnaCrta = __webpack_require__(7);
+
+	var _PozdravnaCrta2 = _interopRequireDefault(_PozdravnaCrta);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	// import RevealOnScroll from './modules/RevealOnScroll';
 	var mobileMenu = new _MobileMenu2.default();
-	new _RevealOnScroll2.default((0, _jquery2.default)(".feature-item"), "85%");
-	new _RevealOnScroll2.default((0, _jquery2.default)(".testimonial"), "60%");
+	// new RevealOnScroll($(".feature-item"), "85%");
+	// new RevealOnScroll($(".testimonial"), "60%");
+	/*jshint esversion: 6 */
+
 	var stickyHeader = new _StickyHeader2.default();
 	var modal = new _Modal2.default();
+	var pozdravnaCrta = new _PozdravnaCrta2.default();
+
+	// console.log('delam');
 
 /***/ },
 /* 1 */
@@ -84,7 +90,8 @@
 	  value: true
 	});
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /*jshint esversion: 6 */
+
 
 	var _jquery = __webpack_require__(2);
 
@@ -101,6 +108,7 @@
 	    this.siteHeader = (0, _jquery2.default)(".site-header");
 	    this.menuIcon = (0, _jquery2.default)(".site-header__menu-icon");
 	    this.menuContent = (0, _jquery2.default)(".site-header__menu-content");
+	    this.menuLI = (0, _jquery2.default)(".primary-nav__link");
 	    this.events();
 	  }
 
@@ -108,6 +116,7 @@
 	    key: "events",
 	    value: function events() {
 	      this.menuIcon.click(this.toggleTheMenu.bind(this));
+	      this.menuLI.click(this.toggleTheMenu.bind(this));
 	    }
 	  }, {
 	    key: "toggleTheMenu",
@@ -10359,7 +10368,7 @@
 	  value: true
 	});
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /*jshint esversion: 6 */
 
 	var _jquery = __webpack_require__(2);
 
@@ -10369,46 +10378,107 @@
 
 	var _noframework2 = _interopRequireDefault(_noframework);
 
+	var _jquerySmoothScroll = __webpack_require__(5);
+
+	var _jquerySmoothScroll2 = _interopRequireDefault(_jquerySmoothScroll);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var RevealOnScroll = function () {
-	  function RevealOnScroll(els, offset) {
-	    _classCallCheck(this, RevealOnScroll);
+	var StickyHeader = function () {
+	  function StickyHeader() {
+	    _classCallCheck(this, StickyHeader);
 
-	    this.itemsToReveal = els;
-	    this.offsetPercentage = offset;
-	    this.hideInitially();
-	    this.createWaypoints();
+	    this.lazyImages = (0, _jquery2.default)(".lazyload");
+	    this.siteHeader = (0, _jquery2.default)(".site-header");
+	    this.headerTriggerElement = (0, _jquery2.default)(".pozdravna-stran__title");
+	    this.createHeaderWaypoint();
+	    this.pageSections = (0, _jquery2.default)(".page-section");
+	    this.headerLinks = (0, _jquery2.default)(".primary-nav a");
+	    this.potujociLinki = (0, _jquery2.default)(".potujoci-linki a");
+	    this.pozdravnaStran = (0, _jquery2.default)(".pozdravna-stran__title");
+	    this.createPageSectionWaypoints();
+	    this.addSmoothScrolling();
+	    this.refreshWaypoints();
 	  }
 
-	  _createClass(RevealOnScroll, [{
-	    key: 'hideInitially',
-	    value: function hideInitially() {
-	      this.itemsToReveal.addClass("reveal-item");
+	  _createClass(StickyHeader, [{
+	    key: 'refreshWaypoints',
+	    value: function refreshWaypoints() {
+	      this.lazyImages.on("load", function () {
+	        Waypoint.refreshAll();
+	      });
 	    }
 	  }, {
-	    key: 'createWaypoints',
-	    value: function createWaypoints() {
+	    key: 'addSmoothScrolling',
+	    value: function addSmoothScrolling() {
+	      this.headerLinks.smoothScroll();
+	      this.potujociLinki.smoothScroll();
+	    }
+	  }, {
+	    key: 'createHeaderWaypoint',
+	    value: function createHeaderWaypoint() {
 	      var that = this;
-	      this.itemsToReveal.each(function () {
-	        var currentItem = this;
+	      new Waypoint({
+	        element: this.headerTriggerElement[0],
+	        handler: function handler(direction) {
+	          if (direction == "down") {
+	            that.siteHeader.addClass("site-header--dark");
+	          } else {
+	            that.siteHeader.removeClass("site-header--dark");
+	          }
+	        }
+	      });
+	    }
+	  }, {
+	    key: 'createPageSectionWaypoints',
+	    value: function createPageSectionWaypoints() {
+	      var that = this;
+	      this.pageSections.each(function () {
+	        var currentPageSection = this;
 	        new Waypoint({
-	          element: currentItem,
-	          handler: function handler() {
-	            (0, _jquery2.default)(currentItem).addClass("reveal-item--is-visible");
+	          element: currentPageSection,
+	          handler: function handler(direction) {
+	            if (direction == "down") {
+	              var matchingHeaderLink = currentPageSection.getAttribute("data-matching-link");
+	              that.headerLinks.removeClass("is-current-link");
+	              (0, _jquery2.default)(matchingHeaderLink).addClass("is-current-link");
+	            }
 	          },
-	          offset: that.offsetPercentage
+	          offset: "18%"
+	        });
+
+	        new Waypoint({
+	          element: currentPageSection,
+	          handler: function handler(direction) {
+	            if (direction == "up") {
+	              var matchingHeaderLink = currentPageSection.getAttribute("data-matching-link");
+	              that.headerLinks.removeClass("is-current-link");
+	              (0, _jquery2.default)(matchingHeaderLink).addClass("is-current-link");
+	            }
+	          },
+	          offset: "-40%"
+	        });
+
+	        new Waypoint({
+	          element: that.pozdravnaStran[0],
+	          handler: function handler(direction) {
+	            if (direction == "up") {
+	              console.log('trigger');
+	              that.headerLinks.removeClass("is-current-link");
+	            }
+	          },
+	          offset: "-2%"
 	        });
 	      });
 	    }
 	  }]);
 
-	  return RevealOnScroll;
+	  return StickyHeader;
 	}();
 
-	exports.default = RevealOnScroll;
+	exports.default = StickyHeader;
 
 /***/ },
 /* 4 */
@@ -11177,114 +11247,6 @@
 /* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _jquery = __webpack_require__(2);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
-	var _noframework = __webpack_require__(4);
-
-	var _noframework2 = _interopRequireDefault(_noframework);
-
-	var _jquerySmoothScroll = __webpack_require__(6);
-
-	var _jquerySmoothScroll2 = _interopRequireDefault(_jquerySmoothScroll);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var StickyHeader = function () {
-	  function StickyHeader() {
-	    _classCallCheck(this, StickyHeader);
-
-	    this.lazyImages = (0, _jquery2.default)(".lazyload");
-	    this.siteHeader = (0, _jquery2.default)(".site-header");
-	    this.headerTriggerElement = (0, _jquery2.default)(".large-hero__title");
-	    this.createHeaderWaypoint();
-	    this.pageSections = (0, _jquery2.default)(".page-section");
-	    this.headerLinks = (0, _jquery2.default)(".primary-nav a");
-	    this.createPageSectionWaypoints();
-	    this.addSmoothScrolling();
-	    this.refreshWaypoints();
-	  }
-
-	  _createClass(StickyHeader, [{
-	    key: 'refreshWaypoints',
-	    value: function refreshWaypoints() {
-	      this.lazyImages.on("load", function () {
-	        Waypoint.refreshAll();
-	      });
-	    }
-	  }, {
-	    key: 'addSmoothScrolling',
-	    value: function addSmoothScrolling() {
-	      this.headerLinks.smoothScroll();
-	    }
-	  }, {
-	    key: 'createHeaderWaypoint',
-	    value: function createHeaderWaypoint() {
-	      var that = this;
-	      new Waypoint({
-	        element: this.headerTriggerElement[0],
-	        handler: function handler(direction) {
-	          if (direction == "down") {
-	            that.siteHeader.addClass("site-header--dark");
-	          } else {
-	            that.siteHeader.removeClass("site-header--dark");
-	          }
-	        }
-	      });
-	    }
-	  }, {
-	    key: 'createPageSectionWaypoints',
-	    value: function createPageSectionWaypoints() {
-	      var that = this;
-	      this.pageSections.each(function () {
-	        var currentPageSection = this;
-	        new Waypoint({
-	          element: currentPageSection,
-	          handler: function handler(direction) {
-	            if (direction == "down") {
-	              var matchingHeaderLink = currentPageSection.getAttribute("data-matching-link");
-	              that.headerLinks.removeClass("is-current-link");
-	              (0, _jquery2.default)(matchingHeaderLink).addClass("is-current-link");
-	            }
-	          },
-	          offset: "18%"
-	        });
-
-	        new Waypoint({
-	          element: currentPageSection,
-	          handler: function handler(direction) {
-	            if (direction == "up") {
-	              var matchingHeaderLink = currentPageSection.getAttribute("data-matching-link");
-	              that.headerLinks.removeClass("is-current-link");
-	              (0, _jquery2.default)(matchingHeaderLink).addClass("is-current-link");
-	            }
-	          },
-	          offset: "-40%"
-	        });
-	      });
-	    }
-	  }]);
-
-	  return StickyHeader;
-	}();
-
-	exports.default = StickyHeader;
-
-/***/ },
-/* 6 */
-/***/ function(module, exports, __webpack_require__) {
-
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 	 * jQuery Smooth Scroll - v2.1.2 - 2017-01-19
 	 * https://github.com/kswedberg/jquery-smooth-scroll
@@ -11627,7 +11589,7 @@
 
 
 /***/ },
-/* 7 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -11654,6 +11616,7 @@
 	    this.modal = (0, _jquery2.default)(".modal");
 	    this.closeModalButton = (0, _jquery2.default)(".modal__close");
 	    this.events();
+	    // console.log('delam');
 	  }
 
 	  _createClass(Modal, [{
@@ -11692,6 +11655,73 @@
 	}();
 
 	exports.default = Modal;
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /*jshint esversion: 6 */
+
+
+	var _jquery = __webpack_require__(2);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var PozdravnaCrta = function () {
+		function PozdravnaCrta() {
+			_classCallCheck(this, PozdravnaCrta);
+
+			this.crtapf = (0, _jquery2.default)(".pozdravna-stran__crta-pf");
+			this.crtazf = (0, _jquery2.default)(".pozdravna-stran__crta-zf");
+			this.crtalp = (0, _jquery2.default)(".pozdravna-stran__crta-lp");
+			this.potujociLinki = (0, _jquery2.default)('.potujoci-linki');
+			this.zazeni(this.crtapf, 2000, "pf");
+			this.zazeni(this.crtazf, 3000, "zf");
+			this.zazeni(this.crtalp, 2500, "lp");
+		}
+
+		_createClass(PozdravnaCrta, [{
+			key: "zazeni",
+			value: function zazeni(element, zamik, oznaka) {
+				var that = this;
+				// console.log(that);
+				setTimeout(function () {
+					// console.log(that);
+					element.addClass("pozdravna-stran__crta-" + oznaka + "--raztegnjena");
+					setTimeout(function () {
+						(0, _jquery2.default)('.potujoci-linki__' + oznaka).addClass("potujoci-linki__" + oznaka + "--nalozi");
+					}, 300);
+
+					setTimeout(function () {
+						element.removeClass("pozdravna-stran__crta-" + oznaka + "--raztegnjena");
+						that.poskrijPL();
+					}, 2000);
+				}, zamik);
+			}
+		}, {
+			key: "poskrijPL",
+			value: function poskrijPL() {
+				var that = this;
+				setTimeout(function () {
+					that.potujociLinki.addClass('potujoci-linki__skrito');
+				}, 5000);
+			}
+		}]);
+
+		return PozdravnaCrta;
+	}();
+
+	exports.default = PozdravnaCrta;
 
 /***/ }
 /******/ ]);

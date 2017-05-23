@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 import $ from 'jquery';
 import waypoints from '../../../../node_modules/waypoints/lib/noframework.waypoints';
 import smoothScroll from 'jquery-smooth-scroll';
@@ -6,10 +8,12 @@ class StickyHeader {
   constructor() {
     this.lazyImages = $(".lazyload");
     this.siteHeader = $(".site-header");
-    this.headerTriggerElement = $(".large-hero__title");
+    this.headerTriggerElement = $(".pozdravna-stran__title");
     this.createHeaderWaypoint();
     this.pageSections = $(".page-section");
     this.headerLinks = $(".primary-nav a");
+    this.potujociLinki = $(".potujoci-linki a");
+    this.pozdravnaStran = $(".pozdravna-stran__title");
     this.createPageSectionWaypoints();
     this.addSmoothScrolling();
     this.refreshWaypoints();
@@ -23,6 +27,7 @@ class StickyHeader {
 
   addSmoothScrolling() {
     this.headerLinks.smoothScroll();
+    this.potujociLinki.smoothScroll();
   }
 
   createHeaderWaypoint() {
@@ -65,6 +70,17 @@ class StickyHeader {
           }
         },
         offset: "-40%"
+      });
+
+      new Waypoint({
+        element: that.pozdravnaStran[0],
+        handler: function(direction) {
+          if (direction == "up") {
+            console.log('trigger');
+            that.headerLinks.removeClass("is-current-link");
+          }
+        },
+        offset: "-2%"
       });
     });
   }

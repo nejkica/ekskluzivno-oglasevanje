@@ -1,0 +1,183 @@
+.pozdravna-stran {
+  position: relative;
+  display: block;
+  margin-top: 0;
+  padding: 0 0;
+  text-align: center;
+  z-index: 1;
+
+  &__crta-pf {
+    position: absolute;
+    bottom: 44vw;
+    left: 74.5vw;
+    border-top: 1px solid #94EDF2;
+    width: 0;
+    height: 0;
+    transform-origin: left top;
+    transform: rotate(65deg);
+    /*transform-origin: right bottom;*/
+    transition: width .3s cubic-bezier(1, 0.64, 0.54, 1);
+
+    @mixin atXLarge {
+      bottom: 40vw;
+    }
+    
+    &--raztegnjena {
+      @mixin atMedium {
+        width: 32vw;
+        transition: width .3s cubic-bezier(1, 0.64, 0.54, 1);
+      }
+    }
+  }
+
+  &__crta-zf {
+    position: absolute;
+    top: 40vw;
+    left: 21.5vw;
+    border-top: 1px solid #94EDF2;
+    width: 0;
+    height: 0;
+    transform-origin: left top;
+    transform: rotate(30deg);
+    transition: width .3s cubic-bezier(1, 0.64, 0.54, 1);
+
+    @mixin atXLarge {
+      top: 35vw;
+    }
+    
+    &--raztegnjena {
+      @mixin atMedium {
+        width: 17vw;
+        transition: width .3s cubic-bezier(1, 0.64, 0.54, 1);
+      }
+    }
+  }
+
+  &__crta-lp {
+    position: absolute;
+    top: 38vw;
+    left: 21vw;
+    border-top: 1px solid #94EDF2;
+    width: 0;
+    height: 0;
+    transform-origin: left top;
+    transform: rotate(-105deg);
+    /*transform-origin: right bottom;*/
+    transition: width .3s cubic-bezier(1, 0.64, 0.54, 1);
+
+    @mixin atXLarge {
+      top: 34vw;
+    }
+    
+    &--raztegnjena {
+      @mixin atMedium {
+        width: 11.5vw;
+        transition: width .3s cubic-bezier(1, 0.64, 0.54, 1);
+      }
+    }
+  }
+
+
+  &__img {
+    position: relative;
+    width: 100vw;
+    min-width: 321px;
+    min-height: 230px;
+    max-height: 870px;
+    margin-top: 40px;
+    /*margin-bottom: 0;*/
+    background-image: url('/assets/images/ps-1s.jpg');
+    background-size: contain;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    padding-top: 74%;
+    z-index: -1;
+    overflow: hidden;
+
+    @mixin atSmall {
+      background-image: url('/assets/images/ps-1.jpg');
+      padding-top: 60%;
+      margin-top: 40px;
+    }
+
+    @mixin atMedium {
+      margin-top: 0;
+    }
+
+    @mixin atXLarge {
+      background-image: url('/assets/images/ps-1w.jpg');
+      padding-top: 49%;
+    }
+
+  }
+
+  &__img-contents {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    /*right: 0;*/
+    width: 100vw;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 0;
+
+    @mixin atMedium {
+      margin-top: 40px;
+    }
+  }
+
+
+  &__title {
+    color: #FFF;
+    font-size: 1.5rem;
+    font-weight: 200;
+    margin-top: .1em;
+    padding-top: .5em;
+    padding-left: .5em;
+    margin-bottom: .8rem;
+    text-align: left;
+
+    @mixin atMedium {
+      text-align: left;
+      margin-top: 1em;
+      font-size: 1.875rem;
+    }
+  }
+
+  &__subtitle {
+    position: absolute;
+    color: #FFF;
+    font-size: 1.5rem;
+    font-weight: 200;
+    bottom: 0;
+    right: 0;
+    padding-right: 1.5rem;
+
+    @mixin atSmall {
+      text-align: left;
+      margin-top: 1em;
+      font-size: 1.875rem;
+    }
+  }
+
+  &__description-div {
+    position: relative;
+    height: auto;
+    display: block;
+    width: 100%;
+    min-width: 285px;
+    color: #FFF;
+    background-color: #091924;
+    margin-top: 0;
+    padding: .05em 10px;
+  }
+
+  &__description {
+    color: #FFF;
+    font-weight: 200;
+    text-align: center;
+    padding: 0;
+    
+  }
+}

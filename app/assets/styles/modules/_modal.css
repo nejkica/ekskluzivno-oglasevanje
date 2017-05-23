@@ -8,8 +8,9 @@
   right: 0;
   opacity: 0;
   visibility: hidden;
-  transform: scale(1.2);
+  transform: scaleX(1.2);
   transition: all .3s ease-out;
+  text-align: center;
 
   &--is-visible {
     opacity: 1;
@@ -17,19 +18,48 @@
     transform: scale(1);
   }
 
+  &__linkedin {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    padding: 20px 0;
+    transform: translateX(-50%) scale(.88);
+
+    @mixin atMedium {
+      position: relative;
+      padding-top: 5em;
+      transform: translateX(-50%) scale(1);
+    }
+  }
+
   &__inner {
     position: absolute;
     width: 100%;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 50px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    @mixin atMedium {
+      width: auto;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  
+    & b, a {
+      font-size: 1.3rem;
+      font-weight: 400;
+      
+    }
+
+    & p {
+      font-size: 1.3rem;
+      font-weight: 300;
+      margin: .5rem 0;
+    }
   }
 
-  &__description {
-    text-align: center;
-    font-size: 1.3rem;
-    font-weight: 300;
-    line-height: 1.65;
-  }
+
 
   &__close {
     position: absolute;

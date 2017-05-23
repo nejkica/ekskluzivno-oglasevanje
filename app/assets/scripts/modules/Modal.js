@@ -6,6 +6,7 @@ class Modal {
     this.modal = $(".modal");
     this.closeModalButton = $(".modal__close");
     this.events();
+    // console.log('delam');
   }
 
   events() {
